@@ -2,15 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("com.google.gms.google-services") version "4.4.2" apply false
     id("kotlin-kapt")
-
-
-
-
-
 }
-
 
 android {
     namespace = "dev.larrea.pc2_larrea"
@@ -35,20 +28,30 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
 }
 
 dependencies {
+    // Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
 
+    // Firebase Auth y Firestore
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Jetpack Compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -57,6 +60,36 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // Material & AppCompat
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
+    // Activity & ConstraintLayout
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+
+    // Navigation Compose
+    implementation("androidx.navigation:navigation-compose:2.8.9")
+
+    // Coil para imágenes
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
+
+    // Material Icons
+    implementation("androidx.compose.material:material-icons-extended")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Lifecycle ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -64,22 +97,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
-    //Add navigation compose
-    implementation("androidx.navigation:navigation-compose:2.8.9")
-    //Add coil compose
-    implementation("io.coil-kt:coil-compose:2.5.0")
-    //Add room
-    implementation("androidx.room:room-runtime:2.6.0")
-    //Add room ktx
-    implementation("androidx.room:room-ktx:2.6.0")
-    //Add room compiler
-    kapt("androidx.room:room-compiler:2.6.0")
-    //Add Material icons
-    implementation("androidx.compose.material:material-icons-extended")
-    //Add coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    //Add lifecycle viewmodel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-
 }
+
+
